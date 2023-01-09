@@ -2,6 +2,12 @@ from dotenv import load_dotenv
 import os
 import logging
 from logging import config
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
+
 load_dotenv('.env')
 logging.config.fileConfig(fname='log.conf', disable_existing_loggers=False)
 logger = logging.getLogger('Yahoo')
@@ -10,8 +16,6 @@ logger.info('Yahoo Mail Started')
 pass_ = os.environ.get('yahoo_app_password')
 print(pass_)
 
-import smtplib
-from email.mime.text import MIMEText
 SMTP_SERVER = "smtp.mail.yahoo.com"
 SMTP_PORT = 587
 SMTP_USERNAME = "sebcin2001@yahoo.com"
@@ -29,6 +33,8 @@ Company URL: [companyUrl]
 Change appointment?? Add Service??
 change notification preference (text msg/email)
 """
+
+
 def send_email():
     logger.info('Send Mail Started')
     msg = MIMEText(co_msg)
@@ -48,5 +54,36 @@ def send_email():
         logger.info('Mail sent')
     mail.quit()
 
-if __name__=='__main__':
+
+def send_email_attachment():
+    logger.info('Send Mail with attachment Started')
+    attachment = 'train.csv'
+    msg = MIMEMultipart()
+    msg['Subject'] = EMAIL_SUBJECT
+    msg['Body'] = 'find attachment below'
+    msg['From'] = EMAIL_FROM
+    msg['To'] = EMAIL_TO
+    mail = MIMEBase('application', "octet-stream")
+    mail.set_payload(open(attachment, "rb").read())
+
+    logger.info(f'File {attachment} attached to email')
+    encoders.encode_base64(mail)
+    mail.add_header('Content-Disposition', 'attachment', filename=attachment)
+    msg.attach(mail)
+
+    try:
+        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+
+            server.login(SMTP_USERNAME, SMTP_PASSWORD)
+            server.send_message(msg)
+    except Exception as e:
+        logger.error('Error : ', e)
+    else:
+        logger.info('Mail sent with attachment')
+
+
+if __name__ == '__main__':
     send_email()
