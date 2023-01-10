@@ -46,6 +46,8 @@ def send_email():
     mail.starttls()
     mail.ehlo()
     try:
+        SMTP_PASSWORD = 'dpyfzexxulcfencg'
+        logger.info('pass:', SMTP_PASSWORD)
         logger.info('Connecting to Server...')
         mail.login(SMTP_USERNAME, SMTP_PASSWORD)
         logger.info('pass:', SMTP_PASSWORD)
