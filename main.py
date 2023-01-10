@@ -87,4 +87,4 @@ def send_email_attachment():
 
 
 if __name__ == '__main__':
-    send_email()
+    send_email_attachment()
