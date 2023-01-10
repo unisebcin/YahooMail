@@ -50,8 +50,6 @@ jobs:
       #----------------------------------------------
       #              run code analyzer
       #----------------------------------------------
-      - name: Run At All
-        run: poetry install --no-interaction
       - name: Run Code Analyzer
         run: |
           source $VENV
