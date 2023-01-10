@@ -6,16 +6,13 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
-import pandas as pd
 
-pd.DataFrame()
 load_dotenv('.env')
 logging.config.fileConfig(fname='log.conf', disable_existing_loggers=False)
 logger = logging.getLogger('Yahoo')
 
 logger.info('Yahoo Mail Started')
 pass_ = os.environ.get('yahoo_app_password')
-print(pass_)
 
 SMTP_SERVER = "smtp.mail.yahoo.com"
 SMTP_PORT = 587
