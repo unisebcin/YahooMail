@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-import os
+# import os
 import logging.config
 import smtplib
 from email.mime.text import MIMEText
@@ -12,12 +12,12 @@ logging.config.fileConfig(fname='log.conf', disable_existing_loggers=False)
 logger = logging.getLogger('Yahoo')
 
 logger.info('Yahoo Mail Started')
-pass_ = os.environ.get('yahoo_app_password')
+# pass_ = os.environ.get('yahoo_app_password')
 
 SMTP_SERVER = "smtp.mail.yahoo.com"
 SMTP_PORT = 587
 SMTP_USERNAME = "sebcin2001@yahoo.com"
-SMTP_PASSWORD = pass_
+SMTP_PASSWORD = "pass_"
 EMAIL_FROM = "sebcin2001@yahoo.com"
 EMAIL_TO = "setsebn@gmail.com"
 EMAIL_SUBJECT = "REMINDER:"
@@ -46,7 +46,6 @@ def send_email():
     mail.starttls()
     mail.ehlo()
     try:
-        SMTP_PASSWORD = 'dpyfzexxulcfencg'
         logger.info('pass:', SMTP_PASSWORD)
         logger.info('Connecting to Server...')
         mail.login(SMTP_USERNAME, SMTP_PASSWORD)
