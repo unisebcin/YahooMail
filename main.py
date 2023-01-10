@@ -12,12 +12,12 @@ logging.config.fileConfig(fname='log.conf', disable_existing_loggers=False)
 logger = logging.getLogger('Yahoo')
 
 logger.info('Yahoo Mail Started')
-pass_ = os.environ.get('SMTP_PASSWORD')
+
 
 SMTP_SERVER = "smtp.mail.yahoo.com"
 SMTP_PORT = 587
 SMTP_USERNAME = "sebcin2001@yahoo.com"
-SMTP_PASSWORD = pass_
+SMTP_PASSWORD = os.environ.get('SMTP_PASSWORD')
 EMAIL_FROM = "sebcin2001@yahoo.com"
 EMAIL_TO = "setsebn@gmail.com"
 EMAIL_SUBJECT = "REMINDER:"
