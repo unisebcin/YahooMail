@@ -42,10 +42,14 @@ def send_email():
     debuglevel = True
     mail = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
     mail.set_debuglevel(debuglevel)
+    mail.ehlo()
     mail.starttls()
+    mail.ehlo()
     try:
         logger.info('Connecting to Server...')
         mail.login(SMTP_USERNAME, SMTP_PASSWORD)
+        logger.info('pass:', SMTP_PASSWORD)
+        mail.ehlo()
         mail.sendmail(EMAIL_FROM, EMAIL_TO, msg.as_string())
     except Exception as e:
         logger.error('Error : ', e)
