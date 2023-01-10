@@ -9,7 +9,7 @@ from email import encoders
 import pandas as pd
 pd.DataFrame()
 load_dotenv('.env')
-logging.config.fileConfig(fname='log.conf', disable_existing_loggers=False)
+logging.config.fileConfig(fname='log.conf', disable_existing_loggers=False) logging.config.fileConfig(fname='log.conf', disable_existing_loggers=False)
 logger = logging.getLogger('Yahoo')
 
 logger.info('Yahoo Mail Started')
