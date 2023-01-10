@@ -17,7 +17,8 @@ pass_ = os.environ.get('yahoo_app_password')
 SMTP_SERVER = "smtp.mail.yahoo.com"
 SMTP_PORT = 587
 SMTP_USERNAME = "sebcin2001@yahoo.com"
-SMTP_PASSWORD = pass_
+if pass_:
+    SMTP_PASSWORD = pass_
 EMAIL_FROM = "sebcin2001@yahoo.com"
 EMAIL_TO = "setsebn@gmail.com"
 EMAIL_SUBJECT = "REMINDER:"
@@ -44,6 +45,7 @@ def send_email():
     mail.set_debuglevel(debuglevel)
     mail.starttls()
     try:
+        logger.info('Connecting to Server...')
         mail.login(SMTP_USERNAME, SMTP_PASSWORD)
         mail.sendmail(EMAIL_FROM, EMAIL_TO, msg.as_string())
     except Exception as e:
@@ -74,7 +76,7 @@ def send_email_attachment():
             server.ehlo()
             server.starttls()
             server.ehlo()
-
+            logger.info('Connecting to Server...')
             server.login(SMTP_USERNAME, SMTP_PASSWORD)
             server.send_message(msg)
     except Exception as e:
