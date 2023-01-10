@@ -46,4 +46,10 @@ jobs:
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction --no-root
-
+      #----------------------------------------------
+      #              run code analyzer
+      #----------------------------------------------
+      - name: Run Code Analyzer
+        run: |
+          source $VENV
+          flake8
