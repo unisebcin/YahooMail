@@ -1,7 +1,6 @@
 from dotenv import load_dotenv
 import os
-import logging
-from logging import config
+import logging.config
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
